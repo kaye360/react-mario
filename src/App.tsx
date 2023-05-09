@@ -28,6 +28,10 @@ export const GameContext = createContext<any>(null)
 
 function App() {
 
+	useEffect( () => {
+		document.title = 'React Mario'
+	}, [])
+
 	const speed: number = 15
 	// const refreshRate: number = 50
 	const gameLength: number = 8000
