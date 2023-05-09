@@ -1,4 +1,4 @@
-import { MutableRefObject, ReactElement, useContext, useEffect, useRef } from "react"
+import { MutableRefObject, ReactElement, useContext, useRef } from "react"
 import marioRunImg from "../assets/mario-run.gif"
 import marioStillImg from "../assets/mario-still.gif"
 import marioJumpImg from "../assets/mario-jump.gif"
