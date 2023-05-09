@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+	#ground {
+		background-image: url('./assets/ground.png');
+	}
+	
+	#goomba1, #goomba4, #goomba7 {
+		animation : goomba-walk 10s linear infinite;
+	}
+
+	#goomba2, #goomba8 {
+		animation: goomba-walk 15s linear infinite;
+	}
+	
+	#goomba3, #goomba6 {
+		animation: goomba-walk 10s linear infinite;
+	}
+
+	#goomba5, #goomba9, #goomba10, #goomba11 {
+		animation: goomba-hop 7s linear infinite;
+	}
+
+	#goomba10 {
+		animation-delay: 500ms;
+	}
+
+	@keyframes goomba-walk {
+		0%, 100% {
+			translate : 0;
+		}
+		25% {
+			translate : 200px;
+		}
+		50% {
+			translate : -200px;
+		}
+	}
+
+	@keyframes goomba-hop {
+		0%, 5%, 10%, 30%, 50%, 60%, 80% {
+			translate: 0;
+		}
+		2.5%, 7.5% {
+			translate: 0 -30px;
+		}
+		40% {
+			translate: 0 -400px;
+		}
+		70% {
+			translate: -50px;
+		}
+	}
+
+	.is-facing-right {
+		transform: rotateX(0);
+	}
+
+	.is-facing-left {
+		transform: rotateY(180deg);
+
+	}
+
+	.is-jumping {
+		animation: is-jumping 1200ms ease-in-out;
+	}
+
+	@keyframes is-jumping {
+		0%, 90%, 100% {
+			translate: 0;
+		}
+		
+		50% {
+			translate: 0 -300px;
+		}
+	}
+
+	.is-dead {
+		animation: is-dead 1.5s ease-in-out both;
+	}
+
+	@keyframes is-dead {
+		0% {
+			translate: 0 0;
+		}
+		0%, 8%, 16%, 24%, 32%, 40%, 48% {
+			opacity: 0;
+		}
+		4%, 12%, 20%, 28%, 36%, 44%, 52% {
+			opacity : 1;
+		}
+		10% {
+			scale: 0.7;
+		}
+		50% {
+			translate: 0 -500px;
+		}
+		100% {
+			scale: 0.5;
+			translate: 0 300px;
+		}
+	}
+
+	.is-won {
+		animation: is-won 1s ease-in-out both;
+	}
+
+	@keyframes is-won {
+		to {
+			scale: 5;
+		}
+	}
+
+	.game-over-anim {
+		animation: game-over-anim 1s ease-in-out 1s both;
+	}
+
+	@keyframes game-over-anim {
+		from {
+			scale: 0;
+			opacity: 0;
+		}
+		to {
+			scale: 1;
+			opacity: 1;
+		}
+	}
+
+	#bullet-bill {
+		animation: bullet-bill-anim 30s linear infinite;
+	}
+
+	@keyframes bullet-bill-anim {
+		to {
+			translate : -6000px;
+		}
+	}
+}
