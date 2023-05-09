@@ -40,10 +40,26 @@ export default function useControls(
 
     function moveRight() : void {
         playerPosition.setPosition(prev => ({ ...prev, x: prev.x - speed, y: 0 }))
+
+        let currentTranslate: string = gameObjects.mario.current.style.translate
+        let currentPos: number = Number( currentTranslate.slice(0,-2) )
+        let newPos: number = currentPos + 5
+
+        if(newPos <= 100) {
+            gameObjects.mario.current.style.translate = newPos + 'px'
+        }
     }
 
     function moveLeft() : void {
         playerPosition.setPosition(prev => ({ ...prev, x: prev.x + speed, y: 0 }))
+
+        let currentTranslate: string = gameObjects.mario.current.style.translate
+        let currentPos: number = Number( currentTranslate.slice(0,-2) )
+        let newPos: number = currentPos - 5
+
+        if(newPos >= -100) {
+            gameObjects.mario.current.style.translate = newPos + 'px'
+        }
     }
 
     function faceRight() : void {

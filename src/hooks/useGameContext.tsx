@@ -42,6 +42,7 @@ export default function useGameContext(
         gameObjects.movable.current.style.left = '0px'
         gameObjects.mario.current.classList.add('is-facing-right')
         gameObjects.mario.current.classList.remove('is-facing-left')
+        gameObjects.mario.current.style.translate = "0"
         gameObjects.sky.current.style.left ='0px'
         playerPosition.setPosition({x: 0, y: 0})
         setIsGameOver(false)

@@ -70,11 +70,11 @@
 
 	@keyframes is-jumping {
 		0%, 90%, 100% {
-			translate: 0;
+			transform: translateY(0);
 		}
 		
 		50% {
-			translate: 0 -300px;
+			transform: translateY(-300px);
 		}
 	}
 
