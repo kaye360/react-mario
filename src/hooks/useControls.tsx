@@ -39,8 +39,11 @@ export default function useControls(
     }
 
     function moveRight() : void {
+
+        // Set Game Position
         playerPosition.setPosition(prev => ({ ...prev, x: prev.x - speed, y: 0 }))
 
+        // TranslateX mario within frame
         let currentTranslate: string = gameObjects.mario.current.style.translate
         let currentPos: number = Number( currentTranslate.slice(0,-2) )
         let newPos: number = currentPos + 5
@@ -51,8 +54,11 @@ export default function useControls(
     }
 
     function moveLeft() : void {
+
+        // Set Game Position
         playerPosition.setPosition(prev => ({ ...prev, x: prev.x + speed, y: 0 }))
 
+        // TranslateX mario within frame
         let currentTranslate: string = gameObjects.mario.current.style.translate
         let currentPos: number = Number( currentTranslate.slice(0,-2) )
         let newPos: number = currentPos - 5
@@ -73,10 +79,10 @@ export default function useControls(
     }
 
     function jump() : void {
-        if( !gameObjects.mario.current.classList.contains('is-jumping') ) {
-            gameObjects.mario.current.classList.add('is-jumping')
-            setTimeout( () => gameObjects.mario.current.classList.remove('is-jumping'), 1000)
-        }
+        // if( !gameObjects.mario.current.classList.contains('is-jumping') ) {
+        //     gameObjects.mario.current.classList.add('is-jumping')
+        //     setTimeout( () => gameObjects.mario.current.classList.remove('is-jumping'), 1000)
+        // }
     }
 
     function render() : void {

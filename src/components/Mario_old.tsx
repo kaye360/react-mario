@@ -6,11 +6,10 @@ import { GameContext } from "../App"
 import { UseGameContextInterface } from "../hooks/useGameContext"
 
 interface MarioProps {
-	mario :  MutableRefObject<HTMLDivElement>,
-	gravity : number
+	mario :  MutableRefObject<HTMLDivElement>
 }
 
-export default function Mario({mario, gravity} : MarioProps) : ReactElement {
+export default function Mario({mario} : MarioProps) : ReactElement {
 
 	const game: UseGameContextInterface = useContext(GameContext)
 
@@ -40,13 +39,11 @@ export default function Mario({mario, gravity} : MarioProps) : ReactElement {
 		// Default
 		marioImg.current = marioRunImg
 	}
-	
 
 	return(
 		<div 
 			id="mario" 
-			className={`absolute left-[300px] z-50 w-[130px] h-[165px] overflow-hidden ${game.isGameOver ? 'is-dead' : ''} ${game.isGameWon ? 'is-won' : ''}`}
-			style={{bottom : gravity + 'px'}}
+			className={`absolute bottom-[49px] left-[300px] z-50 w-[130px] h-[165px] overflow-hidden ${game.isGameOver ? 'is-dead' : ''} ${game.isGameWon ? 'is-won' : ''}`}
 			ref={mario}
 		>
 			<img src={marioImg.current} className="w-[150px] max-w-none h-[165px] absolute left-[-20px] bottom-0 " />

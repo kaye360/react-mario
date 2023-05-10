@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef } from 'react'
+import { createContext, useEffect, useRef, useState } from 'react'
 import useController from './hooks/useController'
 import useResolveKeyPress from './hooks/useResolveKeyPress'
 import usePlayerPosition from './hooks/usePlayerPosition'
@@ -36,8 +36,6 @@ function App() {
 	// const refreshRate: number = 50
 	const gameLength: number = 8000
 
-
-
 	// KeyPress controller -  Controls which keys are pressed
 	const controller = useController()
 
@@ -56,6 +54,14 @@ function App() {
 	// General Game Context
 	const game = useGameContext({ playerPosition, gameObjects, controller })
 
+	// Gravity
+	const [gravity, setGravity] = useState(500)
+	const gravityRef = useRef(500)
+	const velocity = useRef(1)
+
+	useEffect( () => {
+		gravityRef.current = gravity
+	}, [gravity])
 
 
 	// Game loop
@@ -68,20 +74,24 @@ function App() {
 	
 	function loop() {
 
+		// Check for Goomba collision
 		gameObjects.goombas.forEach( goomba => {
 			if( isCollide( goomba.current, game.mario.current ) ) {
 				game.endGame()
 			}
 		})
 
+		// Check for Bullet Bill collision
 		if( isCollide( gameObjects.bulletBill.current, game.mario.current ) ) {
 			game.endGame()
 		} 
 
+		// Check for Win Flag collision
 		if( isCollide( gameObjects.winFlag.current, game.mario.current ) ) {
 			game.winGame()
 		} 
 
+		// Controls
 		if( !gameRef.current?.isGameOver && !gameRef.current?.isGameWon ) {
 
 			if( controller.controllerRef.current.right ) {
@@ -97,6 +107,13 @@ function App() {
 			}
 		}
 
+		// Gravity
+		if( gravityRef.current > 49 ) {
+			velocity.current += 2
+			setGravity(gravity => gravity - 0.5 * velocity.current)
+		}
+
+		// Loop
 		loopRef.current = requestAnimationFrame(loop)
 	}
 
@@ -109,7 +126,7 @@ function App() {
 	return (
 		<GameContext.Provider value={game}>
 			<Game>
-				<Mario mario={gameObjects.mario} />
+				<Mario mario={gameObjects.mario} gravity={gravityRef.current}/>
 
 				<Sky   sky={gameObjects.sky} />
 
@@ -142,14 +159,15 @@ function App() {
 				<GameResetBtn />
 
 				{/* Dev debugging */}
-				{/* <p className='absolute z-50'>
+				<p className='absolute z-50'>
 					position.x: {playerPosition.position.x} <br />
 					position.y: {playerPosition.position.y} <br />
 					controller.left: {controller.keys.left ? 'true' : 'false'} <br />
 					controller.right: {controller.keys.right ? 'true' : 'false'} <br />
 					controller.up: {controller.keys.up ? 'true' : 'false'} <br />
-					isGameOver: {game.isGameOver ? 'true' : 'false'}
-				</p> */}
+					isGameOver: {game.isGameOver ? 'true' : 'false'} <br />
+					gravity: {gravity}
+				</p>
 
 			</Game>		
 		</GameContext.Provider>
