@@ -1,11 +1,13 @@
 import { UseGameObjects } from "./useGameObjects"
+import { useGravityInterface } from "./useGravity"
 import { UsePlayerPosition } from "./usePlayerPosition"
 
 interface UseControlsProps {
     playerPosition : UsePlayerPosition,
     gameObjects    : UseGameObjects
     speed          : number,
-    gameLength     : number
+    gameLength     : number,
+    gravity        : useGravityInterface
 }
 
 interface UseControls {
@@ -13,7 +15,7 @@ interface UseControls {
 }
 
 export default function useControls(
-    { playerPosition, gameObjects, speed, gameLength } : UseControlsProps 
+    { playerPosition, gameObjects, speed, gameLength, gravity } : UseControlsProps 
 ) : UseControls {
 
     function move( direction : 'left' | 'right' | 'up' ) : void {
@@ -79,10 +81,11 @@ export default function useControls(
     }
 
     function jump() : void {
-        // if( !gameObjects.mario.current.classList.contains('is-jumping') ) {
-        //     gameObjects.mario.current.classList.add('is-jumping')
-        //     setTimeout( () => gameObjects.mario.current.classList.remove('is-jumping'), 1000)
-        // }
+        if(gravity.ref.current < 300) {
+            gravity.set(prev => prev + 20)
+        } else {
+            gravity.set(300)
+        }
     }
 
     function render() : void {

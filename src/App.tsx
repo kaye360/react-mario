@@ -18,6 +18,7 @@ import { isCollide } from './utils'
 import WatchOut from './components/WatchOut'
 import WinFlag from './components/WinFlag'
 import GameWon from './components/GameWon'
+import useGravity from './hooks/useGravity'
 
 
 
@@ -45,24 +46,17 @@ function App() {
 	// Game objects - stores DOM element useRefs
 	const gameObjects = useGameObjects()
 
+	// Gravity
+	const gravity = useGravity()
+
 	// Control actions - maps actions to keypress events
-	const controls = useControls({ playerPosition, gameObjects, speed, gameLength })
+	const controls = useControls({ playerPosition, gameObjects, speed, gameLength, gravity })
 
 	// Resolve keypress - DOM keyup and keydown event listeners
 	useResolveKeyPress(controller)
 
 	// General Game Context
 	const game = useGameContext({ playerPosition, gameObjects, controller })
-
-	// Gravity
-	const [gravity, setGravity] = useState(500)
-	const gravityRef = useRef(500)
-	const velocity = useRef(1)
-
-	useEffect( () => {
-		gravityRef.current = gravity
-	}, [gravity])
-
 
 	// Game loop
 	const loopRef = useRef<number>(0) 
@@ -108,10 +102,7 @@ function App() {
 		}
 
 		// Gravity
-		if( gravityRef.current > 49 ) {
-			velocity.current += 2
-			setGravity(gravity => gravity - 0.5 * velocity.current)
-		}
+		gravity.resolveGravity()
 
 		// Loop
 		loopRef.current = requestAnimationFrame(loop)
@@ -126,7 +117,7 @@ function App() {
 	return (
 		<GameContext.Provider value={game}>
 			<Game>
-				<Mario mario={gameObjects.mario} gravity={gravityRef.current}/>
+				<Mario mario={gameObjects.mario} gravity={gravity.ref.current}/>
 
 				<Sky   sky={gameObjects.sky} />
 
@@ -166,7 +157,7 @@ function App() {
 					controller.right: {controller.keys.right ? 'true' : 'false'} <br />
 					controller.up: {controller.keys.up ? 'true' : 'false'} <br />
 					isGameOver: {game.isGameOver ? 'true' : 'false'} <br />
-					gravity: {gravity}
+					gravity: {gravity.gravity}
 				</p>
 
 			</Game>		
