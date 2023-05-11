@@ -28,7 +28,6 @@ export default function useGravity() : useGravityInterface {
 		} else {
 			ref.current = 49
 		}
-        console.log(velocity.current)
     }
 
     return { gravity, set, ref, velocity, resolveGravity }

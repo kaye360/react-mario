@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import { UseGameObjects } from "./useGameObjects"
 import { useGravityInterface } from "./useGravity"
 import { UsePlayerPosition } from "./usePlayerPosition"
@@ -80,12 +81,22 @@ export default function useControls(
         gameObjects.mario.current.classList.remove('is-facing-right')
     }
 
+    const isJumpedAtMaxHeight = useRef(false)
+
     function jump() : void {
-        if(gravity.ref.current < 300) {
+
+        // If the jump has reached the max height, disable jumping for 500ms
+        if( isJumpedAtMaxHeight.current ) return
+
+        if(gravity.ref.current < 300 ) {
             gravity.set(prev => prev + 20)
         } else {
             gravity.set(300)
+            isJumpedAtMaxHeight.current = true
+            setTimeout( () => isJumpedAtMaxHeight.current = false, 500 )
         }
+
+
     }
 
     function render() : void {
