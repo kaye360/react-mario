@@ -49,5 +49,9 @@ export default function useGameContext(
         setIsGameWon(false)
     }
     
-    return { isGameOver, isGameWon, winGame, endGame, resetGame, mario, controller, playerPosition }
+    return { 
+        isGameOver, isGameWon, 
+        winGame, endGame, resetGame, 
+        mario, controller, playerPosition,
+    }
 }

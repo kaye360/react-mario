@@ -14,11 +14,12 @@ import useGameContext, { UseGameContextInterface } from './hooks/useGameContext'
 import GameOver from './components/GameOver'
 import GameResetBtn from './components/GameResetBtn'
 import BulletBill from './components/BulletBill'
-import { isCollide } from './utils'
 import WatchOut from './components/WatchOut'
 import WinFlag from './components/WinFlag'
 import GameWon from './components/GameWon'
 import useGravity from './hooks/useGravity'
+import Platform from './components/Platform'
+import useCollision from './hooks/useCollision'
 
 
 
@@ -34,8 +35,10 @@ function App() {
 	}, [])
 
 	const speed: number = 15
-	// const refreshRate: number = 50
+
 	const gameLength: number = 8000
+
+	const maxJumpHeight = useRef(300)
 
 	// KeyPress controller -  Controls which keys are pressed
 	const controller = useController()
@@ -49,14 +52,16 @@ function App() {
 	// Gravity
 	const gravity = useGravity()
 
+	// General Game Context
+	const game = useGameContext({ playerPosition, gameObjects, controller })
+	
 	// Control actions - maps actions to keypress events
-	const controls = useControls({ playerPosition, gameObjects, speed, gameLength, gravity })
+	const controls = useControls({ playerPosition, gameObjects, speed, gameLength, maxJumpHeight, gravity })
 
 	// Resolve keypress - DOM keyup and keydown event listeners
 	useResolveKeyPress(controller)
 
-	// General Game Context
-	const game = useGameContext({ playerPosition, gameObjects, controller })
+
 
 	// Game loop
 	const loopRef = useRef<number>(0) 
@@ -65,25 +70,11 @@ function App() {
 	useEffect( () => {
 		gameRef.current = game
 	}, [game.playerPosition, game.isGameOver])
+
 	
 	function loop() {
 
-		// Check for Goomba collision
-		gameObjects.goombas.forEach( goomba => {
-			if( isCollide( goomba.current, game.mario.current ) ) {
-				game.endGame()
-			}
-		})
-
-		// Check for Bullet Bill collision
-		if( isCollide( gameObjects.bulletBill.current, game.mario.current ) ) {
-			game.endGame()
-		} 
-
-		// Check for Win Flag collision
-		if( isCollide( gameObjects.winFlag.current, game.mario.current ) ) {
-			game.winGame()
-		} 
+		useCollision({ gameObjects, game, gravity, maxJumpHeight })
 
 		// Controls
 		if( !gameRef.current?.isGameOver && !gameRef.current?.isGameWon ) {
@@ -101,9 +92,6 @@ function App() {
 			}
 		}
 
-		// Gravity
-		gravity.resolveGravity()
-
 		// Loop
 		loopRef.current = requestAnimationFrame(loop)
 	}
@@ -113,6 +101,7 @@ function App() {
 		return () => { cancelAnimationFrame(loopRef.current) }
 	}, [] )
 
+	
 
 	return (
 		<GameContext.Provider value={game}>
@@ -126,6 +115,9 @@ function App() {
 					<WinFlag winFlag={gameObjects.winFlag} />
 
 					<Ground ground={gameObjects.ground} />
+
+					<Platform platform={gameObjects.platforms[0]} position={800} />
+					<Platform platform={gameObjects.platforms[1]} position={2700} />
 
 					<Goomba goomba={gameObjects.goombas[0]} id="1" position={700} />
 					<Goomba goomba={gameObjects.goombas[1]} id="2" position={1400} />

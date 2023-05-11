@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { MutableRefObject, useRef } from "react"
 import { UseGameObjects } from "./useGameObjects"
 import { useGravityInterface } from "./useGravity"
 import { UsePlayerPosition } from "./usePlayerPosition"
@@ -8,6 +8,7 @@ interface UseControlsProps {
     gameObjects    : UseGameObjects
     speed          : number,
     gameLength     : number,
+    maxJumpHeight  : MutableRefObject<number>,
     gravity        : useGravityInterface
 }
 
@@ -16,7 +17,7 @@ interface UseControls {
 }
 
 export default function useControls(
-    { playerPosition, gameObjects, speed, gameLength, gravity } : UseControlsProps 
+    { playerPosition, gameObjects, speed, gameLength, maxJumpHeight, gravity } : UseControlsProps 
 ) : UseControls {
 
     function move( direction : 'left' | 'right' | 'up' ) : void {
@@ -88,10 +89,10 @@ export default function useControls(
         // If the jump has reached the max height, disable jumping for 500ms
         if( isJumpedAtMaxHeight.current ) return
 
-        if(gravity.ref.current < 300 ) {
+        if(gravity.ref.current < maxJumpHeight.current ) {
             gravity.set(prev => prev + 20)
         } else {
-            gravity.set(300)
+            gravity.set( maxJumpHeight.current )
             isJumpedAtMaxHeight.current = true
             setTimeout( () => isJumpedAtMaxHeight.current = false, 500 )
         }

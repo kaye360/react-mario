@@ -3,6 +3,7 @@ import { useRef, MutableRefObject } from "react"
 
 export interface UseGameObjects {
 	ground : MutableRefObject<HTMLDivElement>,
+	platforms : MutableRefObject<HTMLDivElement>[],
 	sky : MutableRefObject<HTMLDivElement>,
 	mario : MutableRefObject<HTMLDivElement>,
 	movable : MutableRefObject<HTMLDivElement>,
@@ -15,6 +16,11 @@ export interface UseGameObjects {
 export default function useGameObjects() : UseGameObjects {
     
 	const ground = useRef() as MutableRefObject<HTMLDivElement>
+
+	const platforms = [
+		useRef() as MutableRefObject<HTMLDivElement>,
+		useRef() as MutableRefObject<HTMLDivElement>,
+	]
 
 	const movable = useRef() as MutableRefObject<HTMLDivElement>
 
@@ -40,5 +46,5 @@ export default function useGameObjects() : UseGameObjects {
 
 	const winFlag = useRef() as MutableRefObject<HTMLDivElement>
 
-    return { ground, sky, mario, movable, goombas, bulletBill, winFlag }
+    return { ground, sky, mario, movable, goombas, bulletBill, winFlag, platforms }
 }
