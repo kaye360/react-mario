@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from 'react'
+import { createContext, useEffect, useRef } from 'react'
 import useController from './hooks/useController'
 import useResolveKeyPress from './hooks/useResolveKeyPress'
 import usePlayerPosition from './hooks/usePlayerPosition'
