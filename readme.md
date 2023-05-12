@@ -1,4 +1,5 @@
 # React Mario!
+Currently only works on a device with a keyboard
 
 ## Controls
 Use the arrows to move left, right, and jump
