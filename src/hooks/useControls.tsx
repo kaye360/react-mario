@@ -94,7 +94,7 @@ export default function useControls(
         } else {
             gravity.set( maxJumpHeight.current )
             isJumpedAtMaxHeight.current = true
-            setTimeout( () => isJumpedAtMaxHeight.current = false, 500 )
+            setTimeout( () => isJumpedAtMaxHeight.current = false, 800 )
         }
 
 

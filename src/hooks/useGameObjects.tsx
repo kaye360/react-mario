@@ -3,7 +3,7 @@ import { useRef, MutableRefObject } from "react"
 
 export interface UseGameObjects {
 	ground : MutableRefObject<HTMLDivElement>,
-	platforms : MutableRefObject<HTMLDivElement>[],
+	platforms : Platform[],
 	sky : MutableRefObject<HTMLDivElement>,
 	mario : MutableRefObject<HTMLDivElement>,
 	movable : MutableRefObject<HTMLDivElement>,
@@ -12,14 +12,37 @@ export interface UseGameObjects {
 	winFlag : MutableRefObject<HTMLDivElement>,
 }
 
+export interface Platform {
+	ref: MutableRefObject<HTMLDivElement>,
+	jumpHeight : number
+}
+
 
 export default function useGameObjects() : UseGameObjects {
     
 	const ground = useRef() as MutableRefObject<HTMLDivElement>
 
-	const platforms = [
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
+	const platforms: Platform[] = [
+		{
+			ref: useRef() as MutableRefObject<HTMLDivElement>,
+			jumpHeight: 500
+		},
+		{
+			ref: useRef() as MutableRefObject<HTMLDivElement>,
+			jumpHeight : 700
+		},
+		{
+			ref : useRef() as MutableRefObject<HTMLDivElement>,
+			jumpHeight : 700
+		},
+		{
+			ref : useRef() as MutableRefObject<HTMLDivElement>,
+			jumpHeight : 700
+		},
+		{
+			ref : useRef() as MutableRefObject<HTMLDivElement>,
+			jumpHeight : 700
+		}
 	]
 
 	const movable = useRef() as MutableRefObject<HTMLDivElement>
@@ -29,6 +52,7 @@ export default function useGameObjects() : UseGameObjects {
 	const mario = useRef() as MutableRefObject<HTMLDivElement>
 
 	const goombas = [
+		useRef() as MutableRefObject<HTMLDivElement>,
 		useRef() as MutableRefObject<HTMLDivElement>,
 		useRef() as MutableRefObject<HTMLDivElement>,
 		useRef() as MutableRefObject<HTMLDivElement>,

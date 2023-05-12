@@ -7,13 +7,25 @@ interface GameProps {
 export default function Game({children} : GameProps) {
 	return (
 		<>
-			<div id="game" className='hidden md:grid items-center justify-center h-screen'>
-				<div className='relative border border-slate-400 w-[800px] h-[600px]  overflow-hidden'>
+			<div id="game" className='grid items-center justify-center h-[90vh]'>
+				<div className='relative border border-slate-400 w-screen h-full  overflow-hidden'>
 					{children}
 				</div>
 			</div>
-			<div className="md:hidden m-8 p-8 rounded-xl border border-slate-400 bg-slate-100">
-				This game only works on larger screens.
+			<div className="h-[10vh] bg-slate-700 grid place-items-center text-slate-200">
+				<div className="flex items-center gap-8">
+					<div>
+						Made by: 
+						<a href="https://joshkaye.dev" className="underline hover:text-sky-400">
+							Josh Kaye
+						</a>
+					</div>
+
+					<a href="https://github.com/kaye360/react-mario" className="inline-block px-2 py-1 border border-slate rounded hover:text-sky-400 hover:border-sky-400">
+						GitHub
+					</a>
+					 
+				</div>
 			</div>
 		</>
 	)

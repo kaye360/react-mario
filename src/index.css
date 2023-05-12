@@ -4,6 +4,10 @@
 
 @layer base {
 
+	* {
+		font-family: 'Press Start 2P';
+	}
+
 	#ground {
 		background-image: url('./assets/ground.png');
 	}
@@ -20,8 +24,8 @@
 		animation: goomba-walk 10s linear infinite;
 	}
 
-	#goomba5, #goomba9, #goomba10, #goomba11 {
-		animation: goomba-hop 7s linear infinite;
+	#goomba5, #goomba9, #goomba10, #goomba11, #goomba12 {
+		animation: goomba-hop 6s linear infinite;
 	}
 
 	#goomba10 {
@@ -48,7 +52,7 @@
 			translate: 0 -30px;
 		}
 		40% {
-			translate: 0 -400px;
+			translate: 0 -500px;
 		}
 		70% {
 			translate: -50px;
@@ -111,6 +115,7 @@
 	@keyframes is-won {
 		to {
 			scale: 5;
+			translate : 0 -30vh;
 		}
 	}
 
@@ -137,5 +142,9 @@
 		to {
 			translate : -6000px;
 		}
+	}
+
+	.brick {
+		background-image: url('./assets/brick.png');
 	}
 }

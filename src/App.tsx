@@ -116,8 +116,11 @@ function App() {
 
 					<Ground ground={gameObjects.ground} />
 
-					<Platform platform={gameObjects.platforms[0]} position={800} />
-					<Platform platform={gameObjects.platforms[1]} position={2700} />
+					<Platform platform={gameObjects.platforms[0].ref} positionX={1500} positionY={49} type="pipe"/>
+					<Platform platform={gameObjects.platforms[1].ref} positionX={3500} positionY={250} />
+					<Platform platform={gameObjects.platforms[2].ref} positionX={3900} positionY={400} />
+					<Platform platform={gameObjects.platforms[3].ref} positionX={5000} positionY={400} />
+					<Platform platform={gameObjects.platforms[4].ref} positionX={6100} positionY={400} />
 
 					<Goomba goomba={gameObjects.goombas[0]} id="1" position={700} />
 					<Goomba goomba={gameObjects.goombas[1]} id="2" position={1400} />
@@ -130,6 +133,7 @@ function App() {
 					<Goomba goomba={gameObjects.goombas[8]} id="9" position={6200} />
 					<Goomba goomba={gameObjects.goombas[9]} id="10" position={6500} />
 					<Goomba goomba={gameObjects.goombas[10]} id="11" position={6800} />
+					<Goomba goomba={gameObjects.goombas[11]} id="12" position={7500} />
 
 					<BulletBill bulletBill={gameObjects.bulletBill} />
 
@@ -144,12 +148,12 @@ function App() {
 				{/* Dev debugging */}
 				<p className='absolute z-50'>
 					position.x: {playerPosition.position.x} <br />
-					position.y: {playerPosition.position.y} <br />
+					{/* position.y: {playerPosition.position.y} <br />
 					controller.left: {controller.keys.left ? 'true' : 'false'} <br />
 					controller.right: {controller.keys.right ? 'true' : 'false'} <br />
 					controller.up: {controller.keys.up ? 'true' : 'false'} <br />
 					isGameOver: {game.isGameOver ? 'true' : 'false'} <br />
-					gravity: {gravity.gravity}
+					gravity: {gravity.gravity} */}
 				</p>
 
 			</Game>		

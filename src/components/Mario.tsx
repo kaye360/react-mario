@@ -45,11 +45,11 @@ export default function Mario({mario, gravity} : MarioProps) : ReactElement {
 	return(
 		<div 
 			id="mario" 
-			className={`absolute left-[300px] z-50 w-[130px] h-[165px] overflow-hidden ${game.isGameOver ? 'is-dead' : ''} ${game.isGameWon ? 'is-won' : ''}`}
+			className={`absolute left-[300px] z-50 w-[100px] h-[120px] overflow-hidden ${game.isGameOver ? 'is-dead' : ''} ${game.isGameWon ? 'is-won' : ''}`}
 			style={{bottom : gravity + 'px'}}
 			ref={mario}
 		>
-			<img src={marioImg.current} className="w-[150px] max-w-none h-[165px] absolute left-[-20px] bottom-0 " />
+			<img src={marioImg.current} className="w-[120px] max-w-none h-[120px] absolute left-[-20px] bottom-0 " />
 		</div>
 	)
 }

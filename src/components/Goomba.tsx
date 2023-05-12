@@ -12,7 +12,7 @@ export default function Goomba({goomba, id, position} : GoombaProps) : ReactElem
 	return(
 		<div 
 			id={'goomba' + id}
-			className='goomba absolute bottom-[35px] z-[9999] w-[60px] h-[71px]'
+			className='goomba absolute bottom-[35px] z-[9999] w-[60px] h-[70px]'
 			style={{left : position + 'px'}}
 			ref={goomba}
 		>

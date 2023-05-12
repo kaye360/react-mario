@@ -1,17 +1,27 @@
 import { MutableRefObject } from "react"
+import pipeImg from "../assets/pipe.png"
 
 interface PlatformProps {
     platform : MutableRefObject<HTMLDivElement>,
-    position : number
+    positionX : number,
+    positionY : number,
+    type? : 'pipe' | 'ledge'
 }
 
-export default function Platform({ platform, position } : PlatformProps) {
+export default function Platform({ platform, positionX, positionY, type = 'ledge' } : PlatformProps) {
 
     return(
         <div 
             ref={platform}
-            className="absolute left-[600px] bottom-[200px] w-[300px] h-[20px] bg-red-500"
-            style={{left : position + 'px'}}
-        ></div>
+            className={`
+                absolute overflow-hidden
+                ${ type === 'pipe' ? 'w-[200px] h-[200px]' : '' } 
+                ${ type === 'ledge' ? 'w-[300px] h-[50px] brick' : ''}
+            `}
+            style={{left : positionX + 'px', bottom : positionY + 'px'}}
+        >
+            { type === 'pipe' && <img src={pipeImg} /> }
+
+        </div>
     )
 }

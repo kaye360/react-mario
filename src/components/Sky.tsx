@@ -1,5 +1,7 @@
 import { MutableRefObject } from "react"
 import cloudImg from "../assets/clouds.png"
+import hillImg from "../assets/hill.png"
+import hillsEyesImg from "../assets/hills-eyes.png"
 
 interface SkyProps {
 	sky : MutableRefObject<HTMLDivElement>
@@ -16,13 +18,22 @@ export default function Sky({sky} : SkyProps) {
 			/>
 			<img 
 				src={cloudImg} 
-				className='absolute top-[200px] left-[600px] w-[200px] h-[150px]' 
+				className='absolute top-[200px] left-[700px] w-[200px] h-[150px]' 
 			/>
 			<img 
 				src={cloudImg} 
-				className='absolute top-[120px] left-[900px] w-[200px] h-[150px]' 
+				className='absolute top-[120px] left-[1300px] w-[200px] h-[150px]' 
 			/>
 
+			<img 
+				src={hillImg}
+				className="absolute bottom-[49px] left-[100px] h-[200px] max-w-none"
+			/>
+
+			<img 
+				src={hillsEyesImg}
+				className="absolute bottom-[49px] left-[1500px] h-[400px] max-w-none"
+			/>
 
 		</div>
 	)

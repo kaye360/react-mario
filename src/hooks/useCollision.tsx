@@ -1,7 +1,7 @@
 import { MutableRefObject } from "react"
 import { isCollide, isTopCollide } from "../utils"
 import { UseGameContextInterface } from "./useGameContext"
-import { UseGameObjects } from "./useGameObjects"
+import { Platform, UseGameObjects } from "./useGameObjects"
 import { useGravityInterface } from "./useGravity"
 
 interface UseCollisionProps {
@@ -40,9 +40,9 @@ export default function useCollision({
     // Check for Platforms Top Collision
     let isOnPlatform: boolean = false
 
-    gameObjects.platforms.forEach( (platform : MutableRefObject<HTMLDivElement>) => {
-        if( isTopCollide( platform.current, gameObjects.mario.current ) ) {
-            setPlatformJumpHeight(450)
+    gameObjects.platforms.forEach( (platform : Platform) => {
+        if( isTopCollide( platform.ref.current, gameObjects.mario.current ) ) {
+            setPlatformJumpHeight(platform.jumpHeight)
             isOnPlatform = true
         }
     })
