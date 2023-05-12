@@ -145,17 +145,6 @@ function App() {
 				<GameWon />
 				<GameResetBtn />
 
-				{/* Dev debugging */}
-				<p className='absolute z-50'>
-					position.x: {playerPosition.position.x} <br />
-					{/* position.y: {playerPosition.position.y} <br />
-					controller.left: {controller.keys.left ? 'true' : 'false'} <br />
-					controller.right: {controller.keys.right ? 'true' : 'false'} <br />
-					controller.up: {controller.keys.up ? 'true' : 'false'} <br />
-					isGameOver: {game.isGameOver ? 'true' : 'false'} <br />
-					gravity: {gravity.gravity} */}
-				</p>
-
 			</Game>		
 		</GameContext.Provider>
 	)
