@@ -86,15 +86,18 @@ export default function useControls(
 
     function jump() : void {
 
-        // If the jump has reached the max height, disable jumping for 500ms
+        // If the jump has reached the max height, disable jumping
         if( isJumpedAtMaxHeight.current ) return
+
+        // If we are in a jump, disable jumping
+        if( gravity.velocity.current > 10 ) return
 
         if(gravity.ref.current < maxJumpHeight.current ) {
             gravity.set(prev => prev + 20)
         } else {
             gravity.set( maxJumpHeight.current )
             isJumpedAtMaxHeight.current = true
-            setTimeout( () => isJumpedAtMaxHeight.current = false, 800 )
+            setTimeout( () => isJumpedAtMaxHeight.current = false, 400 )
         }
 
 
