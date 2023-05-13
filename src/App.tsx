@@ -136,9 +136,9 @@ function App() {
 				<GameWon level={level} totalLevels={totalLevels} />
 
 				{/* Dev debugging */}
-				<p className='absolute z-50'>
+				{/* <p className='absolute z-50'>
 					level: { level.current}
-				</p>
+				</p> */}
 
 			</Game>		
 		</GameContext.Provider>

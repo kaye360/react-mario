@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { MouseEventHandler, useContext } from "react"
 import { GameContext } from "../App"
 import { UseGameContextInterface } from "../hooks/useGameContext"
 import { UseLevelsReturn } from "../hooks/useLevels"
@@ -32,15 +32,10 @@ export default function GameWon({ level, totalLevels } : GameWonProps ) : JSX.El
             <div className="game-over-anim absolute inset-0 z-50 grid place-items-center font-bold  text-8xl text-white ">
 
                 { level.current !== totalLevels ? (
-                    <button onClick={ gotoNextLevel }>
-                        Next Level
-                    </button>
+                    <NextLevelBtn func={gotoNextLevel} />
                 ) : (
-                    <button onClick={ resetGame }>
-                        Reset Game
-                    </button>
-                )
-                }
+                    <ResetGameBtn func={resetGame} />
+                )}
 
                 <div className="bg-emerald-700 bg-opacity-50 p-6">
                     { level.current === totalLevels ? (
@@ -60,4 +55,27 @@ export default function GameWon({ level, totalLevels } : GameWonProps ) : JSX.El
 
     return <></>
 
+}
+
+
+interface BtnProps {
+    func : MouseEventHandler<HTMLButtonElement>
+}
+
+
+export function NextLevelBtn( {func} : BtnProps ) {
+    return(
+        <button onClick={ func } className="text-2xl border border-slate-400 bg-slate-600 px-8 py-4 rounded">
+            Next Level
+        </button>
+    )
+}
+
+
+export function ResetGameBtn( {func} : BtnProps ) {
+    return(
+        <button onClick={ func } className="text-2xl border border-slate-400 bg-slate-600 px-8 py-4 rounded">
+            Reset Game
+        </button>
+    )
 }
