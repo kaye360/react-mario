@@ -12,7 +12,6 @@ import useGameContext, { UseGameContextInterface } from './hooks/useGameContext'
 import GameOver from './components/GameOver'
 import GameWon from './components/GameWon'
 import useGravity from './hooks/useGravity'
-import useCollision from './hooks/useCollision'
 import Level1 from './levels/Level1'
 import useLevels from './hooks/useLevels'
 import Ground from './components/Ground'
@@ -21,6 +20,7 @@ import Level2 from './levels/Level2'
 import BulletBill from './components/BulletBill'
 import WatchOut from './components/WatchOut'
 import GameResetBtn from './components/GameResetBtn'
+import checkCollision from './utils/checkCollision'
 
 
 
@@ -74,12 +74,13 @@ function App() {
 
 	useEffect( () => {
 		gameRef.current = game
-	}, [game.playerPosition, game.isGameOver])
+	}, [game.playerPosition, game.isGameOver, level.current])
 
 	
 	function loop() {
+		const currentLevel: number = level.ref.current
 
-		useCollision({ gameObjects, game, gravity, maxJumpHeight })
+		checkCollision({ gameObjects, game, gravity, maxJumpHeight, level : currentLevel })
 
 		// Controls
 		if( !gameRef.current?.isGameOver && !gameRef.current?.isGameWon ) {
@@ -97,7 +98,6 @@ function App() {
 			}
 		}
 
-		// Loop
 		loopRef.current = requestAnimationFrame(loop)
 	}
 
@@ -116,7 +116,7 @@ function App() {
 
 				<Sky   sky={gameObjects.sky} />
 
-				<Movable movable={gameObjects.movable} style={{}}>
+				<Movable movable={gameObjects.movable} style={{}} >
 
 					<WinFlag winFlag={gameObjects.winFlag} />
 
@@ -134,6 +134,10 @@ function App() {
 				<GameResetBtn />
 				<GameOver />
 				<GameWon level={level} totalLevels={totalLevels} />
+
+				<div className='absolute z-50 p-8'>
+					Level {level.current}/{totalLevels}
+				</div>
 
 				{/* Dev debugging */}
 				{/* <p className='absolute z-50'>

@@ -3,13 +3,24 @@ import { useRef, MutableRefObject } from "react"
 
 export interface UseGameObjects {
 	ground : MutableRefObject<HTMLDivElement>,
-	platforms : Platform[],
+	bulletBill : MutableRefObject<HTMLDivElement>,
+	winFlag : MutableRefObject<HTMLDivElement>,
 	sky : MutableRefObject<HTMLDivElement>,
 	mario : MutableRefObject<HTMLDivElement>,
 	movable : MutableRefObject<HTMLDivElement>,
-	goombas : MutableRefObject<HTMLDivElement>[],
-	bulletBill : MutableRefObject<HTMLDivElement>,
-	winFlag : MutableRefObject<HTMLDivElement>,
+	platforms : {
+		'level1': Platform[],
+		'level2' : Platform[],
+		[key: string] : Platform[]
+	},
+	goombas : {
+		'level1' : MutableRefObject<HTMLDivElement>[],
+		'level2' : MutableRefObject<HTMLDivElement>[],
+		[key: string] : MutableRefObject<HTMLDivElement>[]
+	},
+	giantGoombas : {
+		'level2' : MutableRefObject<HTMLDivElement>[]
+	}
 }
 
 export interface Platform {
@@ -33,56 +44,67 @@ export default function useGameObjects() : UseGameObjects {
 	const winFlag = useRef() as MutableRefObject<HTMLDivElement>
 
 
-	const platforms: Platform[] = [
+	const platforms = {
 
-		// Level 1 (0-4)
-		{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight: 500 },
-		{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
-		{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
-		{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
-		{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+		level1: [
+			{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight: 500 },
+			{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+		] as Platform[],
 
-		// Level 2 (5-9)
-		{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight: 700 },
-		{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 800 },
-		{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
-		{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
-		{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
-		{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 500 }
-	]
+		level2: [
+			{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight: 700 },
+			{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 800 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 500 }
+		] as Platform[],
+
+	}
+	
 
 
-	const goombas = [
+	const goombas = {
 
-		// Level 1 (0-11)
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
+		level1 : [
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+		],
 
-		// Level 2 (12-24)
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-		useRef() as MutableRefObject<HTMLDivElement>,
-	]
+		level2 : [
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+		],
+	}
+	
+	const giantGoombas = {
+		level2 : [
+			useRef() as MutableRefObject<HTMLDivElement>,
+		]
+	}
 
-    return { ground, sky, mario, movable, goombas, bulletBill, winFlag, platforms }
+    return { ground, sky, mario, movable, goombas, giantGoombas, bulletBill, winFlag, platforms }
 }

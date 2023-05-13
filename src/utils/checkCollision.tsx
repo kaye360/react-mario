@@ -1,22 +1,32 @@
-import { MutableRefObject } from "react"
-import { isCollide, isTopCollide } from "../utils"
-import { UseGameContextInterface } from "./useGameContext"
-import { Platform, UseGameObjects } from "./useGameObjects"
-import { useGravityInterface } from "./useGravity"
+/*
+Technically this isn't a hook as it is called within a loop. 
+React hooks cannot be used here
+*/
 
-interface UseCollisionProps {
+import { MutableRefObject } from "react"
+import { isCollide, isTopCollide } from "./utils"
+import { UseGameContextInterface } from "../hooks/useGameContext"
+import { Platform, UseGameObjects } from "../hooks/useGameObjects"
+import { useGravityInterface } from "../hooks/useGravity"
+
+interface CheckCollisionProps {
     gameObjects : UseGameObjects,
     game : UseGameContextInterface,
     gravity: useGravityInterface,
-    maxJumpHeight : MutableRefObject<number>
+    maxJumpHeight : MutableRefObject<number>,
+    level : number
 }
 
-export default function useCollision({ 
-    gameObjects, game, gravity, maxJumpHeight 
-} : UseCollisionProps) : void {
+export default function checkCollision({ 
+    gameObjects, game, gravity, maxJumpHeight, level
+} : CheckCollisionProps) : void {
+
+    // Get Current Level
+    let currentLevel: string = 'level' + level
 
     // Check for Goomba collision
-    gameObjects.goombas.forEach( goomba => {
+    const currentLevelGoombas: MutableRefObject<HTMLDivElement>[] = gameObjects.goombas[currentLevel]
+    currentLevelGoombas.forEach( goomba => {
         if( isCollide( goomba.current, game.mario.current ) ) {
             game.endGame()
         }
@@ -40,7 +50,9 @@ export default function useCollision({
     // Check for Platforms Top Collision
     let isOnPlatform: boolean = false
 
-    gameObjects.platforms.forEach( (platform : Platform) => {
+    const currentLevelPlatforms: Platform[] = gameObjects.platforms[currentLevel]
+    console.log(currentLevel)
+    currentLevelPlatforms.forEach( (platform : Platform) => {
         if( isTopCollide( platform.ref.current, gameObjects.mario.current ) ) {
             setPlatformJumpHeight(platform.jumpHeight)
             isOnPlatform = true
