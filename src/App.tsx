@@ -20,6 +20,7 @@ import GameWon from './components/GameWon'
 import useGravity from './hooks/useGravity'
 import Platform from './components/Platform'
 import useCollision from './hooks/useCollision'
+import Level1 from './levels/level1'
 
 
 
@@ -106,6 +107,11 @@ function App() {
 	return (
 		<GameContext.Provider value={game}>
 			<Game>
+
+				<Level1 />
+				<div>
+					Hello
+				</div>
 				<Mario mario={gameObjects.mario} gravity={gravity.ref.current}/>
 
 				<Sky   sky={gameObjects.sky} />
