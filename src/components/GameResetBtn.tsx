@@ -9,10 +9,10 @@ export default function GameResetBtn() {
     if( game.isGameOver || game.isGameWon ) {
         return(
             <button 
-                className="game-over-anim absolute z-50 top-8 left-1/2 -translate-x-1/2 px-8 py-4 rounded bg-lime-300 border-2 border-lime-500 text-2xl hover:bg-lime-200"
+                className="game-over-anim absolute z-[9999999] top-8 left-1/2 -translate-x-1/2 px-8 py-4 rounded bg-orange-500 border-2 border-orange-700 text-2xl hover:bg-orange-300"
                 onClick={ () => game.resetGame() }
             >
-                Reset Game
+                Retry
             </button>
         )
     }

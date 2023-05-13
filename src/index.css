@@ -59,6 +59,35 @@
 		}
 	}
 
+	.giant-goomba {
+		animation : giant-goomba-rage 10s linear infinite;
+	}
+
+	@keyframes giant-goomba-rage {
+		2%, 6%, 10%, 14% {
+			transform: rotate(10deg);
+		}
+		4%, 8%, 12%, 16% {
+			transform: rotate(-10deg);
+		}
+		18% {
+			transform: none;
+		}
+		25% {
+			 transform: none;
+		}
+		30% {
+			transform: translateX(-200px) translateY(-400px) rotate(-180deg);
+		}
+		40%, 50% {
+			transform: translateX(-400px) translateY(0px) rotate(-360deg);
+		}
+		55% {
+			transform: none;
+		}
+
+	}
+
 	.is-facing-right {
 		transform: rotateX(0);
 	}

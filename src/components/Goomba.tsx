@@ -1,7 +1,7 @@
 import { MutableRefObject, ReactElement } from "react"
 import goombaImg from "../assets/goomba.png"
 
-interface GoombaProps {
+export interface GoombaProps {
 	goomba : MutableRefObject<HTMLDivElement>,
 	position : number,
 	id: string
