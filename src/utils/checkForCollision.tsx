@@ -9,7 +9,7 @@ import { UseGameContextInterface } from "../hooks/useGameContext"
 import { Platform, UseGameObjects } from "../hooks/useGameObjects"
 import { useGravityInterface } from "../hooks/useGravity"
 
-interface CheckCollisionProps {
+interface CheckForCollisionProps {
     gameObjects : UseGameObjects,
     game : UseGameContextInterface,
     gravity: useGravityInterface,
@@ -17,9 +17,9 @@ interface CheckCollisionProps {
     level : number
 }
 
-export default function checkCollision({ 
+export default function checkForCollision({ 
     gameObjects, game, gravity, maxJumpHeight, level
-} : CheckCollisionProps) : void {
+} : CheckForCollisionProps) : void {
 
     // Get Current Level
     let currentLevel: string = 'level' + level

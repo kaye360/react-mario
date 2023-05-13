@@ -20,7 +20,7 @@ import Level2 from './levels/Level2'
 import BulletBill from './components/BulletBill'
 import WatchOut from './components/WatchOut'
 import GameResetBtn from './components/GameResetBtn'
-import checkCollision from './utils/checkCollision'
+import checkForCollision from './utils/checkForCollision'
 
 
 
@@ -80,7 +80,7 @@ function App() {
 	function loop() {
 		const currentLevel: number = level.ref.current
 
-		checkCollision({ gameObjects, game, gravity, maxJumpHeight, level : currentLevel })
+		checkForCollision({ gameObjects, game, gravity, maxJumpHeight, level : currentLevel })
 
 		// Controls
 		if( !gameRef.current?.isGameOver && !gameRef.current?.isGameWon ) {
