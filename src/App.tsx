@@ -137,15 +137,15 @@ function App() {
 				<GameOver />
 				<GameWon level={level} totalLevels={totalLevels} />
 
-				<div className='hidden absolute z-50 p-8'>
+				<div className='absolute z-50 p-8'>
 					Level {level.current}/{totalLevels}
 				</div>
 
 				{/* Dev debugging */}
-				<p className='absolute z-50'>
+				{/* <p className='absolute z-50'>
 					level: { level.current} <br />
 					POs {playerPosition.playerPosRef.current.x}
-				</p>
+				</p> */}
 
 			</Game>		
 		</GameContext.Provider>
