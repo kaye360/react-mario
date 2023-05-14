@@ -32,10 +32,7 @@ export const GameContext = createContext<any>(null)
 
 function App() {
 
-	useEffect( () => {
-		document.title = 'React Mario'
-	}, [])
-
+	// Config
 	const speed: number = 15
 
 	const gameLength: number = 8000
@@ -43,6 +40,11 @@ function App() {
 	const maxJumpHeight = useRef(300)
 
 	const totalLevels = 3
+
+	// Doc Title
+	useEffect( () => {
+		document.title = 'React Mario'
+	}, [])
 
 	// KeyPress controller -  Controls which keys are pressed
 	const controller = useController()
@@ -59,6 +61,7 @@ function App() {
 	// General Game Context
 	const game = useGameContext({ playerPosition, gameObjects, controller })
 
+	// Levels
 	const level = useLevels({totalLevels})
 
 	// Control actions - maps actions to keypress events
