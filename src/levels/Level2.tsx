@@ -6,7 +6,7 @@ import { LevelProps } from "./Level";
 
 export default function Level2({ gameObjects, level } : LevelProps) : JSX.Element {
 
-    if(level.current === 2) return(
+    return level.current === 2 ? (
         <>
             <Platform platform={gameObjects.platforms.level2[0].ref} positionX={500} positionY={250} width={50} />
             <Platform platform={gameObjects.platforms.level2[1].ref} positionX={900} positionY={500} width={50} />
@@ -30,7 +30,8 @@ export default function Level2({ gameObjects, level } : LevelProps) : JSX.Elemen
 
             <GiantGoomba giantGoomba={gameObjects.giantGoombas.level2[0]} position={7500} />
         </>
+    ) : (
+        <></>
     )
 
-    return <></>
 }

@@ -13,9 +13,10 @@ export interface UseLevelsReturn {
 
 export default function useLevels( { totalLevels} : UseLevelsProps ) : UseLevelsReturn {
 
-    const [current, setCurrent] = useState<number>(1)
+    const startingLevel = 1
+    const [current, setCurrent] = useState<number>(startingLevel)
 
-    const ref = useRef<number>(1)
+    const ref = useRef<number>(startingLevel)
 
     useEffect(() => {
         ref.current = current

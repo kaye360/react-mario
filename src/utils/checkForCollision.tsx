@@ -21,24 +21,33 @@ export default function checkForCollision({
     gameObjects, game, gravity, maxJumpHeight, level
 } : CheckForCollisionProps) : void {
 
+    const mario = gameObjects.mario.current
     // Get Current Level
     let currentLevel: string = 'level' + level
 
     // Check for Goomba collision
     const currentLevelGoombas: MutableRefObject<HTMLDivElement>[] = gameObjects.goombas[currentLevel]
-    currentLevelGoombas.forEach( goomba => {
-        if( isCollide( goomba.current, game.mario.current ) ) {
+    currentLevelGoombas?.forEach( goomba => {
+        if( isCollide( goomba.current, mario ) ) {
+            game.endGame()
+        }
+    })
+
+    // Check for Giant Goomba collision
+    const currentLevelGiantGoombas : MutableRefObject<HTMLDivElement>[] = gameObjects.giantGoombas[currentLevel]
+    currentLevelGiantGoombas?.forEach( giantGoomba => {
+        if( isCollide( giantGoomba.current, mario ) ) {
             game.endGame()
         }
     })
 
     // Check for Bullet Bill collision
-    if( isCollide( gameObjects.bulletBill.current, game.mario.current ) ) {
+    if( isCollide( gameObjects.bulletBill.current, mario ) ) {
         game.endGame()
     } 
 
     // Check for Win Flag collision
-    if( isCollide( gameObjects.winFlag.current, game.mario.current ) ) {
+    if( isCollide( gameObjects.winFlag.current, mario ) ) {
         game.winGame()
     } 
 

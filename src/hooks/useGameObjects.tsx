@@ -19,7 +19,8 @@ export interface UseGameObjects {
 		[key: string] : MutableRefObject<HTMLDivElement>[]
 	},
 	giantGoombas : {
-		'level2' : MutableRefObject<HTMLDivElement>[]
+		'level2' : MutableRefObject<HTMLDivElement>[],
+		[key: string] : MutableRefObject<HTMLDivElement>[]
 	}
 }
 
@@ -55,6 +56,15 @@ export default function useGameObjects() : UseGameObjects {
 		] as Platform[],
 
 		level2: [
+			{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight: 700 },
+			{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 800 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
+			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 500 }
+		] as Platform[],
+
+		level3: [
 			{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight: 700 },
 			{ ref: useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 800 },
 			{ ref : useRef() as MutableRefObject<HTMLDivElement>, jumpHeight : 700 },
@@ -101,7 +111,16 @@ export default function useGameObjects() : UseGameObjects {
 	}
 	
 	const giantGoombas = {
+
 		level2 : [
+			useRef() as MutableRefObject<HTMLDivElement>,
+		],
+
+		level3 : [
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
+			useRef() as MutableRefObject<HTMLDivElement>,
 			useRef() as MutableRefObject<HTMLDivElement>,
 		]
 	}

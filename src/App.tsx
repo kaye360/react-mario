@@ -21,6 +21,7 @@ import BulletBill from './components/BulletBill'
 import WatchOut from './components/WatchOut'
 import GameResetBtn from './components/GameResetBtn'
 import checkForCollision from './utils/checkForCollision'
+import Level3 from './levels/Level3'
 
 
 
@@ -41,7 +42,7 @@ function App() {
 
 	const maxJumpHeight = useRef(300)
 
-	const totalLevels = 2
+	const totalLevels = 3
 
 	// KeyPress controller -  Controls which keys are pressed
 	const controller = useController()
@@ -128,6 +129,7 @@ function App() {
 
 					<Level1 level={level} gameObjects={ gameObjects } />
 					<Level2 level={level} gameObjects={ gameObjects } />
+					<Level3 level={level} gameObjects={ gameObjects } />
 
 				</Movable>
 
@@ -135,14 +137,15 @@ function App() {
 				<GameOver />
 				<GameWon level={level} totalLevels={totalLevels} />
 
-				<div className='absolute z-50 p-8'>
+				<div className='hidden absolute z-50 p-8'>
 					Level {level.current}/{totalLevels}
 				</div>
 
 				{/* Dev debugging */}
-				{/* <p className='absolute z-50'>
-					level: { level.current}
-				</p> */}
+				<p className='absolute z-50'>
+					level: { level.current} <br />
+					POs {playerPosition.playerPosRef.current.x}
+				</p>
 
 			</Game>		
 		</GameContext.Provider>
