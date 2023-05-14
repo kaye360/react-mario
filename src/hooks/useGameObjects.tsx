@@ -7,7 +7,7 @@ export interface UseGameObjects {
 	winFlag : MutableRefObject<HTMLDivElement>,
 	sky : MutableRefObject<HTMLDivElement>,
 	mario : MutableRefObject<HTMLDivElement>,
-	movable : MutableRefObject<HTMLDivElement>,
+	camera : MutableRefObject<HTMLDivElement>,
 	platforms : {
 		'level1': Platform[],
 		'level2' : Platform[],
@@ -34,7 +34,7 @@ export default function useGameObjects() : UseGameObjects {
     
 	const ground = useRef() as MutableRefObject<HTMLDivElement>
 	
-	const movable = useRef() as MutableRefObject<HTMLDivElement>
+	const camera = useRef() as MutableRefObject<HTMLDivElement>
 
 	const sky = useRef() as MutableRefObject<HTMLDivElement>
 
@@ -125,5 +125,5 @@ export default function useGameObjects() : UseGameObjects {
 		]
 	}
 
-    return { ground, sky, mario, movable, goombas, giantGoombas, bulletBill, winFlag, platforms }
+    return { ground, sky, mario, camera, goombas, giantGoombas, bulletBill, winFlag, platforms }
 }

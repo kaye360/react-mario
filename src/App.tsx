@@ -7,7 +7,6 @@ import Game from './components/Game'
 import Sky from './components/Sky'
 import Mario from './components/Mario'
 import useControls from './hooks/useControls'
-import Movable from './components/Movable'
 import useGameContext, { UseGameContextInterface } from './hooks/useGameContext'
 import GameOver from './components/GameOver'
 import GameWon from './components/GameWon'
@@ -22,6 +21,7 @@ import WatchOut from './components/WatchOut'
 import GameResetBtn from './components/GameResetBtn'
 import checkForCollision from './utils/checkForCollision'
 import Level3 from './levels/Level3'
+import Camera from './components/Camera'
 
 
 
@@ -120,7 +120,7 @@ function App() {
 
 				<Sky   sky={gameObjects.sky} />
 
-				<Movable movable={gameObjects.movable} style={{}} >
+				<Camera camera={gameObjects.camera} style={{}}>
 
 					<WinFlag winFlag={gameObjects.winFlag} />
 
@@ -133,8 +133,7 @@ function App() {
 					<Level1 level={level} gameObjects={ gameObjects } />
 					<Level2 level={level} gameObjects={ gameObjects } />
 					<Level3 level={level} gameObjects={ gameObjects } />
-
-				</Movable>
+				</Camera>
 
 				<GameResetBtn />
 				<GameOver />

@@ -1,17 +1,17 @@
 import { CSSProperties, MutableRefObject, ReactElement } from "react"
 
 
-interface MovableProps {
+interface CameraProps {
     style: CSSProperties,
-    movable: MutableRefObject<HTMLDivElement>,
+    camera: MutableRefObject<HTMLDivElement>,
     children: ReactElement | ReactElement[]
 }
 
-export default function Movable({style, movable, children} : MovableProps) : ReactElement {
+export default function Camera({style, camera, children} : CameraProps) : ReactElement {
 
     return(
         <div 
-            ref={movable}
+            ref={camera}
             className=" absolute inset-0 z-20"
             style={style}
         >

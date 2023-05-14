@@ -39,7 +39,7 @@ export default function useGameContext(
     }
 
     function resetGame() {
-        gameObjects.movable.current.style.left = '0px'
+        gameObjects.camera.current.style.left = '0px'
         gameObjects.mario.current.classList.add('is-facing-right')
         gameObjects.mario.current.classList.remove('is-facing-left')
         gameObjects.mario.current.style.translate = "0"

@@ -104,7 +104,7 @@ export default function useControls(
     }
 
     function render() : void {
-        gameObjects.movable.current.style.left = playerPosition.playerPosRef.current.x + 'px'
+        gameObjects.camera.current.style.left = playerPosition.playerPosRef.current.x + 'px'
         const skyOffset = playerPosition.playerPosRef.current.x / 10
         gameObjects.sky.current.style.left = skyOffset + 'px'
     }

@@ -60,7 +60,6 @@ export default function checkForCollision({
     let isOnPlatform: boolean = false
 
     const currentLevelPlatforms: Platform[] = gameObjects.platforms[currentLevel]
-    console.log(currentLevel)
     currentLevelPlatforms.forEach( (platform : Platform) => {
         if( isTopCollide( platform.ref.current, gameObjects.mario.current ) ) {
             setPlatformJumpHeight(platform.jumpHeight)
