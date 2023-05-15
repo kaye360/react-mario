@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef } from "react"
+import { MutableRefObject, useRef } from "react"
 import { UseGameObjects } from "./useGameObjects"
 import { useGravityInterface } from "./useGravity"
 import { UsePlayerPosition } from "./usePlayerPosition"
