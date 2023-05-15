@@ -6,17 +6,16 @@ export interface UseLevelsProps {
 
 export interface UseLevelsReturn {
     current : number,
-    next : Function,
-    reset : Function,
-    ref : MutableRefObject<number>
+    next    : Function,
+    reset   : Function,
+    ref     : MutableRefObject<number>
 }
 
 export default function useLevels( { totalLevels} : UseLevelsProps ) : UseLevelsReturn {
 
-    const startingLevel = 1
+    const startingLevel: number = 1
     const [current, setCurrent] = useState<number>(startingLevel)
-
-    const ref = useRef<number>(startingLevel)
+    const ref                   = useRef<number>(startingLevel)
 
     useEffect(() => {
         ref.current = current

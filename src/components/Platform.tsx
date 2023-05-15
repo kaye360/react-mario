@@ -1,12 +1,12 @@
-import { MutableRefObject } from "react"
 import pipeImg from "../assets/pipe.png"
+import { gameObject } from "../hooks/useGameObjects"
 
 interface PlatformProps {
-    platform : MutableRefObject<HTMLDivElement>,
-    x : number,
-    y : number,
-    type? : 'pipe' | 'ledge',
-    width? : number
+    platform : gameObject,
+    x        : number,
+    y        : number,
+    type?    : 'pipe' | 'ledge',
+    width?   : number
 }
 
 export default function Platform({ platform, x, y, type = 'ledge', width = 300 } : PlatformProps) {

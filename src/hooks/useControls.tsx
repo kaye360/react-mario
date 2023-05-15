@@ -42,15 +42,17 @@ export default function useControls(
         render()
     }
 
+    // Helper functions
+
     function moveRight() : void {
 
         // Set Game Position
         playerPosition.setPosition(prev => ({ ...prev, x: prev.x - speed, y: 0 }))
 
-        // TranslateX mario within frame
+        // +TranslateX mario within frame
         let currentTranslate: string = gameObjects.mario.current.style.translate
-        let currentPos: number = Number( currentTranslate.slice(0,-2) )
-        let newPos: number = currentPos + 5
+        let currentPos: number       = Number( currentTranslate.slice(0,-2) )
+        let newPos: number           = currentPos + 5
 
         if(newPos <= 100) {
             gameObjects.mario.current.style.translate = newPos + 'px'
@@ -62,10 +64,10 @@ export default function useControls(
         // Set Game Position
         playerPosition.setPosition(prev => ({ ...prev, x: prev.x + speed, y: 0 }))
 
-        // TranslateX mario within frame
+        // -TranslateX mario within frame
         let currentTranslate: string = gameObjects.mario.current.style.translate
-        let currentPos: number = Number( currentTranslate.slice(0,-2) )
-        let newPos: number = currentPos - 5
+        let currentPos: number       = Number( currentTranslate.slice(0,-2) )
+        let newPos: number           = currentPos - 5
 
         if(newPos >= -100) {
             gameObjects.mario.current.style.translate = newPos + 'px'
@@ -93,20 +95,28 @@ export default function useControls(
         if( gravity.velocity.current > 10 ) return
 
         if(gravity.ref.current < maxJumpHeight.current ) {
+            // If we are jumping and are below the maxJumpHeight, continue upward
             gravity.set(prev => prev + 20)
         } else {
+            // We are at maxJumpHeight, so disible jumping for 400ms
             gravity.set( maxJumpHeight.current )
             isJumpedAtMaxHeight.current = true
             setTimeout( () => isJumpedAtMaxHeight.current = false, 400 )
         }
+    }
 
+    function setCameraXPos() : void {
+        gameObjects.camera.current.style.left = playerPosition.playerPosRef.current.x + 'px'
+    }
 
+    function setSkyXPos() : void {
+        const skyOffset = playerPosition.playerPosRef.current.x / 10
+        gameObjects.sky.current.style.left = skyOffset + 'px'
     }
 
     function render() : void {
-        gameObjects.camera.current.style.left = playerPosition.playerPosRef.current.x + 'px'
-        const skyOffset = playerPosition.playerPosRef.current.x / 10
-        gameObjects.sky.current.style.left = skyOffset + 'px'
+        setCameraXPos()
+        setSkyXPos()
     }
 
     return { move }

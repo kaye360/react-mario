@@ -1,24 +1,24 @@
 import { useState } from "react"
 import { UsePlayerPosition } from "./usePlayerPosition"
-import { UseGameObjects } from "./useGameObjects"
+import { UseGameObjects, gameObject } from "./useGameObjects"
 import { UseController } from "./useController"
 
 
 interface UseGameContextProps {
     playerPosition : UsePlayerPosition, 
-    gameObjects : UseGameObjects,
-    controller: UseController
+    gameObjects    : UseGameObjects,
+    controller     : UseController
 }
 
 export interface UseGameContextInterface {
-    isGameOver: boolean,
-    isGameWon: boolean,
-    endGame: Function,
-    winGame: Function,
-    resetGame: Function,
-    mario : React.MutableRefObject<HTMLDivElement>,
+    isGameOver     : boolean,
+    isGameWon      : boolean,
+    endGame        : Function,
+    winGame        : Function,
+    resetGame      : Function,
+    mario          : gameObject,
     playerPosition : UsePlayerPosition,
-    controller: UseController
+    controller     : UseController
 }
 
 export default function useGameContext(
@@ -26,7 +26,7 @@ export default function useGameContext(
 ) : UseGameContextInterface  {
 
     const [isGameOver, setIsGameOver] = useState(false)
-    const [isGameWon, setIsGameWon] = useState(false)
+    const [isGameWon, setIsGameWon]   = useState(false)
 
     const mario = gameObjects.mario
 
@@ -38,13 +38,35 @@ export default function useGameContext(
         setIsGameWon(true)
     }
 
-    function resetGame() {
-        gameObjects.camera.current.style.left = '0px'
+    function resetGame() : void {
+        resetCamera()
+        resetMario()
+        resetPlayerPosition()
+        resetSkyPosition()
+        resetGameState()
+    }
+    
+    // Helper functions
+    
+    function resetMario() : void {
         gameObjects.mario.current.classList.add('is-facing-right')
         gameObjects.mario.current.classList.remove('is-facing-left')
         gameObjects.mario.current.style.translate = "0"
-        gameObjects.sky.current.style.left ='0px'
+    }
+    
+    function resetCamera() : void {
+        gameObjects.camera.current.style.left = '0px'
+    }
+    
+    function resetPlayerPosition() : void {
         playerPosition.setPosition({x: 0, y: 0})
+    }
+    
+    function resetSkyPosition() {
+        gameObjects.sky.current.style.left ='0px'
+    }
+
+    function resetGameState() {
         setIsGameOver(false)
         setIsGameWon(false)
     }

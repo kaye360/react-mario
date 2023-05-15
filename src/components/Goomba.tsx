@@ -1,10 +1,11 @@
-import { MutableRefObject, ReactElement } from "react"
+import { ReactElement } from "react"
 import goombaImg from "../assets/goomba.png"
+import { gameObject } from "../hooks/useGameObjects"
 
 export interface GoombaProps {
-	goomba : MutableRefObject<HTMLDivElement>,
-	x : number,
-	id: string
+	goomba : gameObject,
+	x 	   : number,
+	id	   : string
 }
 
 export default function Goomba({goomba, id, x} : GoombaProps) : ReactElement {

@@ -1,9 +1,10 @@
-import { MutableRefObject, ReactElement } from "react"
+import { ReactElement } from "react"
 import goombaImg from "../assets/goomba.png"
+import { gameObject } from "../hooks/useGameObjects"
 
 interface GiantGoombaProps {
-	giantGoomba: MutableRefObject<HTMLDivElement>,
-	x : number
+	giantGoomba : gameObject,
+	x 			: number
 }
 
 export default function GiantGoomba({giantGoomba, x} : GiantGoombaProps) : ReactElement {

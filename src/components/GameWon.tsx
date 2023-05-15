@@ -4,7 +4,7 @@ import { UseGameContextInterface } from "../hooks/useGameContext"
 import { UseLevelsReturn } from "../hooks/useLevels"
 
 interface GameWonProps {
-    level : UseLevelsReturn,
+    level       : UseLevelsReturn,
     totalLevels : number
 }
 

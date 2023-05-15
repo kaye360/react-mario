@@ -1,8 +1,9 @@
-import { MutableRefObject, ReactElement } from "react"
+import { ReactElement } from "react"
 import bulletBillImg from "../assets/bullet-bill.gif"
+import { gameObject } from "../hooks/useGameObjects"
 
 interface bulletBillProps {
-	bulletBill : MutableRefObject<HTMLDivElement>,
+	bulletBill : gameObject
 }
 
 export default function BulletBill({bulletBill} : bulletBillProps) : ReactElement {

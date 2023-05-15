@@ -1,7 +1,7 @@
-import { MutableRefObject } from "react"
+import { gameObject } from "../hooks/useGameObjects"
 
 interface GroundProps {
-	ground:  MutableRefObject<HTMLDivElement>,
+	ground :  gameObject,
 }
 
 export default function Ground({ground} : GroundProps) {

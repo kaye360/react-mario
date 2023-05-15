@@ -1,32 +1,26 @@
-/*
-Technically this isn't a hook as it is called within a loop. 
-React hooks cannot be used here
-*/
-
 import { MutableRefObject } from "react"
 import { isCollide, isTopCollide } from "./utils"
 import { UseGameContextInterface } from "../hooks/useGameContext"
-import { Platform, UseGameObjects } from "../hooks/useGameObjects"
+import { Platform, UseGameObjects, gameObject } from "../hooks/useGameObjects"
 import { useGravityInterface } from "../hooks/useGravity"
 
 interface CheckForCollisionProps {
-    gameObjects : UseGameObjects,
-    game : UseGameContextInterface,
-    gravity: useGravityInterface,
+    gameObjects   : UseGameObjects,
+    game          : UseGameContextInterface,
+    gravity       : useGravityInterface,
     maxJumpHeight : MutableRefObject<number>,
-    level : number
+    level         : number
 }
 
 export default function checkForCollision({ 
     gameObjects, game, gravity, maxJumpHeight, level
 } : CheckForCollisionProps) : void {
 
-    const mario = gameObjects.mario.current
-    // Get Current Level
-    let currentLevel: string = 'level' + level
+    const mario: HTMLDivElement = gameObjects.mario.current
+    let   currentLevel: string  = 'level' + level
 
     // Check for Goomba collision
-    const currentLevelGoombas: MutableRefObject<HTMLDivElement>[] = gameObjects.goombas[currentLevel]
+    const currentLevelGoombas: gameObject[] = gameObjects.goombas[currentLevel]
     currentLevelGoombas?.forEach( goomba => {
         if( isCollide( goomba.current, mario ) ) {
             game.endGame()
@@ -34,7 +28,7 @@ export default function checkForCollision({
     })
 
     // Check for Giant Goomba collision
-    const currentLevelGiantGoombas : MutableRefObject<HTMLDivElement>[] = gameObjects.giantGoombas[currentLevel]
+    const currentLevelGiantGoombas : gameObject[] = gameObjects.giantGoombas[currentLevel]
     currentLevelGiantGoombas?.forEach( giantGoomba => {
         if( isCollide( giantGoomba.current, mario ) ) {
             game.endGame()

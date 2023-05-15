@@ -1,12 +1,13 @@
-import { MutableRefObject, ReactElement, useContext, useRef } from "react"
+import { ReactElement, useContext, useRef } from "react"
 import marioRunImg from "../assets/mario-run.gif"
 import marioStillImg from "../assets/mario-still.gif"
 import marioJumpImg from "../assets/mario-jump.gif"
 import { GameContext } from "../App"
 import { UseGameContextInterface } from "../hooks/useGameContext"
+import { gameObject } from "../hooks/useGameObjects"
 
 interface MarioProps {
-	mario :  MutableRefObject<HTMLDivElement>,
+	mario   : gameObject,
 	gravity : number
 }
 
@@ -17,7 +18,7 @@ export default function Mario({mario, gravity} : MarioProps) : ReactElement {
 	let marioImg = useRef( marioRunImg )
 
 	if( game.isGameOver ) {
-		// Mario is dead
+		// Dead
 		marioImg.current = marioJumpImg
 
 	} else if( game.controller.keys.up ) {

@@ -1,10 +1,11 @@
-import { CSSProperties, MutableRefObject, ReactElement } from "react"
+import { CSSProperties, ReactElement } from "react"
+import { gameObject } from "../hooks/useGameObjects"
 
 
 interface CameraProps {
-    style: CSSProperties,
-    camera: MutableRefObject<HTMLDivElement>,
-    children: ReactElement | ReactElement[]
+    style    : CSSProperties,
+    camera   : gameObject,
+    children : ReactElement | ReactElement[]
 }
 
 export default function Camera({style, camera, children} : CameraProps) : ReactElement {

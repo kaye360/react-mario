@@ -1,8 +1,9 @@
-import { MutableRefObject, ReactElement } from "react"
+import { ReactElement } from "react"
 import winFlagImg from "../assets/win-flag.gif"
+import { gameObject } from "../hooks/useGameObjects"
 
 interface WinFlagProps {
-    winFlag : MutableRefObject<HTMLDivElement>
+    winFlag : gameObject
 }
 
 export default function winFlag({winFlag} : WinFlagProps) : ReactElement {

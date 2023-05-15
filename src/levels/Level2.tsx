@@ -6,7 +6,7 @@ import { LevelProps } from "./Level";
 
 export default function Level2({ gameObjects, level } : LevelProps) : JSX.Element {
 
-    const { platforms, goombas, giantGoombas}    = gameObjects
+    const { platforms, goombas, giantGoombas} = gameObjects
 
     return level.current === 2 ? (
         <>

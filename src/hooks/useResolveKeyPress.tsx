@@ -23,7 +23,7 @@ export default function useResolveKeyPress( controller : UseController ) : void 
 
 		}
 
-		document.addEventListener('keyup', (e: any) => resolveKeyPress(e) )
+		document.addEventListener('keyup',   (e: any) => resolveKeyPress(e) )
 		document.addEventListener('keydown', (e: any) => resolveKeyPress(e) )
 	}, [])
 }
