@@ -43,7 +43,7 @@ export default function useGameObjects() : UseGameObjects {
 	const platforms = {
 
 		level1: [
-			{ ref : useRef() as gameObject, jumpHeight: 500 },
+			{ ref : useRef() as gameObject, jumpHeight : 500 },
 			{ ref : useRef() as gameObject, jumpHeight : 700 },
 			{ ref : useRef() as gameObject, jumpHeight : 700 },
 			{ ref : useRef() as gameObject, jumpHeight : 700 },
@@ -51,7 +51,7 @@ export default function useGameObjects() : UseGameObjects {
 		] as Platform[],
 
 		level2: [
-			{ ref : useRef() as gameObject, jumpHeight: 700 },
+			{ ref : useRef() as gameObject, jumpHeight : 700 },
 			{ ref : useRef() as gameObject, jumpHeight : 800 },
 			{ ref : useRef() as gameObject, jumpHeight : 700 },
 			{ ref : useRef() as gameObject, jumpHeight : 700 },
@@ -60,17 +60,15 @@ export default function useGameObjects() : UseGameObjects {
 		] as Platform[],
 
 		level3: [
-			{ ref : useRef() as gameObject, jumpHeight: 700 },
-			{ ref : useRef() as gameObject, jumpHeight : 800 },
 			{ ref : useRef() as gameObject, jumpHeight : 700 },
 			{ ref : useRef() as gameObject, jumpHeight : 700 },
 			{ ref : useRef() as gameObject, jumpHeight : 700 },
-			{ ref : useRef() as gameObject, jumpHeight : 500 }
+			{ ref : useRef() as gameObject, jumpHeight : 700 },
+			{ ref : useRef() as gameObject, jumpHeight : 700 },
+			{ ref : useRef() as gameObject, jumpHeight : 700 }
 		] as Platform[],
 
 	}
-	
-
 
 	const goombas = {
 

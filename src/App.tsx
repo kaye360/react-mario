@@ -116,7 +116,7 @@ function App() {
 		<GameContext.Provider value={game}>
 			<Game>
 
-				<Mario mario={gameObjects.mario} gravity={gravity.ref.current}/>
+				<Mario mario={gameObjects.mario} gravity={gravity.gravity}/>
 
 				<Sky   sky={gameObjects.sky} />
 
@@ -126,7 +126,7 @@ function App() {
 
 					<Ground ground={gameObjects.ground} />
 
-					<BulletBill bulletBill={gameObjects.bulletBill} />
+					{/* <BulletBill bulletBill={gameObjects.bulletBill} /> */}
 
 					<WatchOut />
 
@@ -139,15 +139,18 @@ function App() {
 				<GameOver />
 				<GameWon level={level} totalLevels={totalLevels} />
 
-				<div className='absolute z-50 p-8'>
+				{/* <div className='absolute z-50 p-8'>
 					Level {level.current}/{totalLevels}
-				</div>
+				</div> */}
 
 				{/* Dev debugging */}
-				{/* <p className='absolute z-50'>
-					level: { level.current} <br />
-					POs {playerPosition.playerPosRef.current.x}
-				</p> */}
+				<p className='absolute z-50'>
+					{/* level: { level.current} <br /> */}
+					{/* POs {playerPosition.playerPosRef.current.x} */}
+					gravity : {gravity.gravity} <br />
+					velocity : {gravity.velocity.current} <br />
+					maxJumpHeight : {maxJumpHeight.current} <br />
+				</p>
 
 			</Game>		
 		</GameContext.Provider>

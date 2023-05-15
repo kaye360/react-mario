@@ -24,19 +24,32 @@ export default function useGravity() : useGravityInterface {
         }
 	}, [gravity])
 
-    /**
-     * @todo Come back to this and get * 1.1 to work
-     */
     // Increase velocity if jumping
     function resolveGravity() : void {
-		if( ref.current > 49 ) {
-			// velocity.current *= 1.1
-			velocity.current += 0.5
+        console.log(velocity.current)
+		if( gravity > 49 ) {
+            setVelocityWithinBounds()            
 			set( prev => prev - 0.5 * velocity.current )
 		} else {
+            console.log('LT 49')
 			ref.current = 49
-            // velocity.current = 1
+            velocity.current = 1
 		}
+    }
+
+    function setVelocityWithinBounds() {
+
+        if( velocity.current < 1 ) {
+            velocity.current = 1
+            return
+        }
+
+        if( velocity.current > 50 ) {
+            velocity.current = 50
+            return
+        }
+
+        velocity.current *= 1.15
     }
 
     return { gravity, set, ref, velocity, resolveGravity }

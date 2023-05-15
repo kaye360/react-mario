@@ -1,4 +1,4 @@
-import { MutableRefObject, useRef } from "react"
+import { MutableRefObject, useEffect, useRef } from "react"
 import { UseGameObjects } from "./useGameObjects"
 import { useGravityInterface } from "./useGravity"
 import { UsePlayerPosition } from "./usePlayerPosition"
@@ -84,25 +84,24 @@ export default function useControls(
         gameObjects.mario.current.classList.remove('is-facing-right')
     }
 
-    const isJumpedAtMaxHeight = useRef(false)
+    const isPeaked = () : boolean =>  maxJumpHeight.current - gravity.ref.current < 10
+    const isDescending = useRef<boolean>(false)
 
     function jump() : void {
 
-        // If the jump has reached the max height, disable jumping
-        if( isJumpedAtMaxHeight.current ) return
+        console.log(isDescending.current)
+        
+        if( isDescending.current ) return
 
-        // If we are in a jump, disable jumping
-        if( gravity.velocity.current > 10 ) return
-
-        if(gravity.ref.current < maxJumpHeight.current ) {
-            // If we are jumping and are below the maxJumpHeight, continue upward
-            gravity.set(prev => prev + 20)
-        } else {
-            // We are at maxJumpHeight, so disible jumping for 400ms
-            gravity.set( maxJumpHeight.current )
-            isJumpedAtMaxHeight.current = true
-            setTimeout( () => isJumpedAtMaxHeight.current = false, 400 )
+        if( isPeaked() ) {
+            isDescending.current = true
+            gravity.velocity.current  = 2
+            gravity.set(maxJumpHeight.current)
+            setTimeout( () => isDescending.current = false, 800 )
+            return
         }
+
+        gravity.set( prev => prev + 20)
     }
 
     function setCameraXPos() : void {
